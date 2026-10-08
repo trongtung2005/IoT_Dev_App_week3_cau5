@@ -27,3 +27,5 @@ Sử dụng nút nhấn ở chân GPIO 4 để điều khiển:
 * Công cụ biên dịch: **PlatformIO IDE**.
 * Framework: Arduino.
 * Thư viện phụ thuộc: `mathertel/OneButton @ ^2.6.1`.
+  
+## Video minh họa: https://drive.google.com/drive/folders/1nPiopzosEprU4COO4lYdoeTPR60hqkIT?usp=sharing
