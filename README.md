@@ -1,19 +1,29 @@
-## Đặt bài toán 
+# OneButton LED Controller continuous
 
-- Phần cứng: Chỉ có một nút bấm nhả (push button) và một đèn LED hiển thị tích hợp sẵn trên các dev board điển hình
-- Yêu cầu Viết chương trình có chức năng sau:
-    + bấm nút một lần (single click) để bật/tắt LED (đảo trạng thái). 
-    + nhấn giữ >2s (hold) thì LED sẽ chuyển sang trạng thái nhấp nháy liên tục (blink 200ms một lần)
-    + nếu tiếp tục nhấn single click thì LED lại chuyển trạng thái bật/tắt 
-    + Lưu ý: khử rung phím bấm 
+## Mô tả dự án
+Dự án ứng dụng vi điều khiển ESP32 và thư viện `OneButton` để sử dụng **MỘT nút nhấn duy nhất** (cắm ngoài) điều khiển linh hoạt **HAI đèn LED** (một đèn built-in và một đèn cắm ngoài) với nhiều chế độ khác nhau.
 
-## Mục đích DEMO
+## Chức năng
+Sử dụng nút nhấn ở chân GPIO 4 để điều khiển:
+* **Double Click:** Chuyển đổi luân phiên quyền điều khiển giữa LED 1 và LED 2.
+* **Single Click:** Đảo trạng thái (Bật/Tắt) của LED đang được chọn.
+* **Long Press (Giữ nút):** Kích hoạt chế độ nhấp nháy (chu kỳ 200ms) cho LED đang được chọn.
 
-Project này sử dụng thư viện mã mở nổi tiếng gần đây là OneButton và thư viện LED tự viết:
-- `OneButton` tác giả Matthias Hertel: https://github.com/mathertel/OneButton 
-- `LED.h` Cung cấp API sáng sủa để khởi tạo và điều khiển LED (đảo trạng thái - flip, và nháy - blink)
-- Việc gom các chức năng đọc phím bấm và điều khiển LED như trên vào các thư viện để có thể tái sử dụng, và giúp mã sáng sủa hơn. Các chức năng như trong yêu cầu xuất hiện rất phổ biến ở hầu hết tất cả các project vi điều khiển. 
+## Yêu cầu phần cứng
+* **LED 1 (Built-in):** Có sẵn trên mạch ESP32.
+* **LED 2:** Cực dương cắm vào chân `D18`, cực âm nối qua điện trở 220Ω về `GND`.
+* **Nút nhấn:** Một chân nối vào `D4`, chân còn lại nối về `GND`.
 
-Project này cũng minh họa điểm mạnh của PIO là có thể dùng chung mã nguồn cho nhiều nền tảng phần cứng khác nhau, ở đây:
-- Chip ESP32 kiến trúc xtensa lõi kép
-- Chip ESP32-C3 kiến trúc RISC-V lõi đơn 
+### Sơ đồ đấu nối phần cứng
+
+| Linh kiện | Chân trên ESP32 | Hướng dẫn kết nối |
+| :--- | :--- | :--- |
+| **LED 1 (Built-in)** | `D2` (GPIO 2) | Đèn LED xanh lam tích hợp sẵn trên mạch, không cần đấu nối. |
+| **LED 2 (Gắn ngoài)**| `D18` (GPIO 18) | Cực dương (chân dài) cắm vào `D18`. Cực âm (chân ngắn) nối tiếp qua điện trở rồi cắm về chân `GND`. |
+| **Nút nhấn (Gắn ngoài)**| `D4` (GPIO 4) | Một chân của nút bấm nối vào `D4`, chân đối diện nối về `GND` (Cấu hình Active LOW). |
+
+## Yêu cầu phần mềm & Môi trường phát triển
+* IDE: **Visual Studio Code**.
+* Công cụ biên dịch: **PlatformIO IDE**.
+* Framework: Arduino.
+* Thư viện phụ thuộc: `mathertel/OneButton @ ^2.6.1`.

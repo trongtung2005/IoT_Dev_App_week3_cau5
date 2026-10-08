@@ -2,34 +2,46 @@
 #include "LED.h"
 #include <OneButton.h>
 
-LED led(LED_PIN, LED_ACT);
+LED led1(LED1_PIN, LED1_ACT);
+LED led2(LED2_PIN, LED2_ACT); 
 
-void btnPush();
-void btnDoubleClick();
+OneButton button(EXT_BTN_PIN, !EXT_BTN_ACT);
 
-OneButton button(BTN_PIN, !BTN_ACT);
+int selectedLED = 1;
 
-void setup()
+void btnSingleClick()
 {
-    led.off();
-  
-    button.attachClick(btnPush);
-  
+    if (selectedLED == 1) {
+        led1.flip();
+    } else {
+        led2.flip();
+    }
+}
+
+void btnDoubleClick() 
+{
+    selectedLED = (selectedLED == 1) ? 2 : 1;
+}
+
+void btnLongPress() {
+    if (selectedLED == 1) {
+        led1.blink(200);
+    } else {
+        led2.blink(200);
+    }
+}
+
+void setup() {
+    led1.off();
+    led2.off();
+    
+    button.attachClick(btnSingleClick);
     button.attachDoubleClick(btnDoubleClick);
+    button.attachLongPressStart(btnLongPress);
 }
 
-void loop()
-{
-    led.loop();
+void loop() {
+    led1.loop();
+    led2.loop();
     button.tick();
-}
-
-void btnPush()
-{
-    led.flip();
-}
-
-void btnDoubleClick()
-{
-    led.blink(200);
 }
