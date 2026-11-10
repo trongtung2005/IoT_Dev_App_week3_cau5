@@ -28,4 +28,4 @@ Sử dụng nút nhấn ở chân GPIO 4 để điều khiển:
 * Framework: Arduino.
 * Thư viện phụ thuộc: `mathertel/OneButton @ ^2.6.1`.
   
-## Video minh họa: https://drive.google.com/drive/folders/1nPiopzosEprU4COO4lYdoeTPR60hqkIT?usp=sharing
+## Video minh họa: https://drive.google.com/file/d/13PwUSumwnuMqXGi0BzAV69S3ca3ALEeK/view?usp=sharing
